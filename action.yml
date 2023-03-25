@@ -1,11 +1,28 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Visual Studio Marketplace Publisher'
+description: 'Public your Visual Studio extensions to the marketplace with ease!'
+author: 'Coding with Calvin'
+branding:
+  color: purple
+  icon: upload-cloud
 inputs:
-  milliseconds: # change this
+  marketplace-pat:
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+    description: 'Your personal access token for the Marketplace'
+    default: '${{ secrets.VS_PAT }}'
+  publish-manifest-path:
+    required: true
+    description: 'Relative path to your publish manifest'
+    default: './src/extension.manifest.json'    
+  vsix-path:
+    required: true
+    description: 'Relative path to your VSIX file'
+    default: './output/extension.vsix'    
+  vs-version:
+    description: 'Version of Visual Studio to search; defaults to latest if not specified'
+    required: false
+  vs-prerelease:
+    description: 'Enable searching for pre-release versions of Visual Studio'
+    required: false        
 runs:
   using: 'node16'
   main: 'dist/index.js'

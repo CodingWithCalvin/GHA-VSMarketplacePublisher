@@ -1,0 +1,11 @@
+inputs:
+  marketplace-pat:
+    type: string
+  publish-manifest-path:
+    type: string
+  vsix-path:
+    type: string
+  vs-version:
+    type: string
+  vs-prerelease:
+    type: boolean
