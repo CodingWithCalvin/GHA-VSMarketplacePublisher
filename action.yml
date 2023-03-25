@@ -8,15 +8,12 @@ inputs:
   marketplace-pat:
     required: true
     description: 'Your personal access token for the Marketplace'
-    default: '${{ secrets.VS_PAT }}'
   publish-manifest-path:
     required: true
     description: 'Relative path to your publish manifest'
-    default: './src/extension.manifest.json'    
   vsix-path:
     required: true
     description: 'Relative path to your VSIX file'
-    default: './output/extension.vsix'    
   vs-version:
     description: 'Version of Visual Studio to search; defaults to latest if not specified'
     required: false
