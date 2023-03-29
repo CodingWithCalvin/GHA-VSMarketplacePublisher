@@ -2,7 +2,7 @@
   "name": "action-vs-marketplace-publish",
   "version": "1.0.0",
   "private": true,
-  "description": "Public your Visual Studio extensions to the marketplace with ease!",
+  "description": "Publish your Visual Studio extensions to the marketplace with ease!",
   "main": "index.js",
   "scripts": {
     "build": "ncc build ./src/main.ts",
