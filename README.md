@@ -1,4 +1,4 @@
-# calvinallen/action-vs-marketplace-publish
+# codingwithcalvin/action-vs-marketplace-publish
 
 Github Action to publish your Visual Studio extension to the marketplace
 
