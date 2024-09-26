@@ -1,6 +1,7 @@
 name: 'Visual Studio Marketplace Publisher'
-description: 'Publish your Visual Studio extensions to the marketplace with ease!'
-author: 'Coding with Calvin'
+description:
+  'Publish your Visual Studio extensions to the marketplace with ease!'
+author: 'Coding With Calvin'
 branding:
   color: purple
   icon: upload-cloud
@@ -15,11 +16,12 @@ inputs:
     required: true
     description: 'Relative path to your VSIX file'
   vs-version:
-    description: 'Version of Visual Studio to search; defaults to latest if not specified'
+    description:
+      'Version of Visual Studio to search; defaults to latest if not specified'
     required: false
   vs-prerelease:
     description: 'Enable searching for pre-release versions of Visual Studio'
-    required: false        
+    required: false
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'

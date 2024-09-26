@@ -3,18 +3,18 @@ import * as exec from '@actions/exec/lib/exec'
 import * as fs from 'fs'
 import * as io from '@actions/io'
 import * as path from 'path'
-import {ExecOptions} from '@actions/exec/lib/interfaces'
+import { ExecOptions } from '@actions/exec/lib/interfaces'
 
 const IS_WINDOWS = process.platform === 'win32'
 
-const MARKETPLACE_PAT = core.getInput('marketplace-pat', {required: true})
+const MARKETPLACE_PAT = core.getInput('marketplace-pat', { required: true })
 const VS_VERSION = core.getInput('vs-version') || 'latest'
 const VS_ALLOW_PRERELEASE = core.getInput('vs-prerelease') || 'false'
 
 let PUBLISH_MANIFEST_PATH = core.getInput('publish-manifest-path', {
   required: true
 })
-let VSIX_PATH = core.getInput('vsix-path', {required: true})
+let VSIX_PATH = core.getInput('vsix-path', { required: true })
 
 async function run(): Promise<void> {
   try {
@@ -26,22 +26,36 @@ async function run(): Promise<void> {
     }
 
     if (!fs.existsSync(PUBLISH_MANIFEST_PATH)) {
-      PUBLISH_MANIFEST_PATH = path.join(
-        process.env.GITHUB_WORKSPACE!,
-        PUBLISH_MANIFEST_PATH
-      )
+      if (process.env.GITHUB_WORKSPACE) {
+        PUBLISH_MANIFEST_PATH = path.join(
+          process.env.GITHUB_WORKSPACE,
+          PUBLISH_MANIFEST_PATH
+        )
 
-      if (!fs.existsSync(PUBLISH_MANIFEST_PATH)) {
-        core.setFailed(`No VSIX file at: '${PUBLISH_MANIFEST_PATH}'`)
+        if (!fs.existsSync(PUBLISH_MANIFEST_PATH)) {
+          core.setFailed(
+            `No publish manifest located at: '${PUBLISH_MANIFEST_PATH}'`
+          )
+          return
+        }
+      } else {
+        core.setFailed(
+          `No publish manifest located at: '${PUBLISH_MANIFEST_PATH}'`
+        )
         return
       }
     }
 
     if (!fs.existsSync(VSIX_PATH)) {
-      VSIX_PATH = path.join(process.env.GITHUB_WORKSPACE!, VSIX_PATH)
+      if (process.env.GITHUB_WORKSPACE) {
+        VSIX_PATH = path.join(process.env.GITHUB_WORKSPACE, VSIX_PATH)
 
-      if (!fs.existsSync(VSIX_PATH)) {
-        core.setFailed(`No publish manifest located at: '${VSIX_PATH}'`)
+        if (!fs.existsSync(VSIX_PATH)) {
+          core.setFailed(`No VSIX located at: '${VSIX_PATH}'`)
+          return
+        }
+      } else {
+        core.setFailed(`No VSIX located at: '${VSIX_PATH}'`)
         return
       }
     }
