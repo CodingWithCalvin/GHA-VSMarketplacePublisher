@@ -17,7 +17,7 @@ steps:
     uses: actions/checkout@v2
 
   - name: Visual Studio Marketplace Publisher
-    uses: CodingWithCalvin/GHA-VSMarketplacePublisher@v2
+    uses: CodingWithCalvin/GHA-VSMarketplacePublisher@v2.0.0
     with:
       # REQUIRED
       marketplace-pat: ${{ secrets.vs_pat }}
