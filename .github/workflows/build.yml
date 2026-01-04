@@ -5,9 +5,25 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - '__tests__/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'action.yml'
+      - '.github/workflows/build.yml'
   push:
     branches:
       - main
+    paths:
+      - 'src/**'
+      - '__tests__/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'action.yml'
+      - '.github/workflows/build.yml'
 
 jobs:
   build:
