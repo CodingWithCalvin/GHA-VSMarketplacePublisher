@@ -1,40 +1,60 @@
-# CodingWithCalvin/GHA-VSMarketplacePublisher
+# Visual Studio Marketplace Publisher
 
-Github Action to publish your Visual Studio extension to the marketplace
+[![Build](https://img.shields.io/github/actions/workflow/status/CodingWithCalvin/GHA-VSMarketplacePublisher/build.yml?style=for-the-badge&label=Build)](https://github.com/CodingWithCalvin/GHA-VSMarketplacePublisher/actions/workflows/build.yml)
+[![GitHub release](https://img.shields.io/github/v/release/CodingWithCalvin/GHA-VSMarketplacePublisher?style=for-the-badge)](https://github.com/CodingWithCalvin/GHA-VSMarketplacePublisher/releases)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
 
-## Usage
+📦 Publish your Visual Studio extensions to the marketplace with ease!
 
-You can use the VS Marketplace Publish GitHub Action by configuring a YAML-based
-workflow file, e.g. .github/workflows/deploy.yml.
+This GitHub Action publishes your Visual Studio extension (.vsix) to the Visual Studio Marketplace.
 
-> _This action only works on a Windows-based runner_
+## 🚀 Usage
 
-## Publish a local VSIX File
+You can use the Visual Studio Marketplace Publisher GitHub Action by configuring a YAML-based workflow file, e.g. `.github/workflows/deploy.yml`.
 
-```yml
+> ⚠️ **Note:** This action only works on a Windows-based runner.
+
+## 📥 Inputs
+
+| Input | Required | Description |
+|-------|----------|-------------|
+| `marketplace-pat` | Yes | Your Personal Access Token for the Visual Studio Marketplace |
+| `publish-manifest-path` | Yes | Path to your publish manifest (JSON file) |
+| `vsix-path` | Yes | Path to the local VSIX package to publish |
+| `vs-version` | No | Version of Visual Studio tooling to use (default: `latest`) |
+| `vs-prerelease` | No | Allow pre-release Visual Studio tooling (default: `false`) |
+
+## 📋 Example
+
+Publish a local VSIX file:
+
+```yaml
 steps:
   - name: Checkout
-    uses: actions/checkout@v2
+    uses: actions/checkout@v4
 
   - name: Visual Studio Marketplace Publisher
-    uses: CodingWithCalvin/GHA-VSMarketplacePublisher@v2.0.0
+    uses: CodingWithCalvin/GHA-VSMarketplacePublisher@v2
     with:
       # REQUIRED
-      marketplace-pat: ${{ secrets.vs_pat }}
-      publish-manifest-path: ./src/vsixManifest.json
-      vsix-path: ./src/outputFolder/Extension.vsix
+      marketplace-pat: ${{ secrets.VS_MARKETPLACE_PAT }}
+      publish-manifest-path: './src/vsixManifest.json'
+      vsix-path: './src/outputFolder/Extension.vsix'
 
       # OPTIONAL
       vs-version: latest
       vs-prerelease: false
 ```
 
-## Inputs
+## 👥 Contributors
 
-| Input                 | Required | Description                                                                      |
-| --------------------- | -------- | -------------------------------------------------------------------------------- |
-| marketplace-pat       | Y        | Your 'Personal Access Token' to perform actions on the Visual Studio Marketplace |
-| publish-manifest-path | Y        | Path to the manifest used for the publish                                        |
-| vsix-path             | Y        | Path to the local VSIX package you wish to publish                               |
-| vs-version            | N        | Specify the exact version of Visual Studio tooling to use; default to `latest`   |
-| vs-prerelease         | N        | Allow a pre-release installation of Visual Studio tooling; default to `false`    |
+<!-- readme: contributors -start -->
+<!-- readme: contributors -end -->
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+---
+
+Made with ❤️ by Coding With Calvin
