@@ -15,5 +15,6 @@ jobs:
       version: ${{ inputs.version }}
       action-name: 'Visual Studio Marketplace Publisher'
       action-slug: 'visual-studio-marketplace-publisher'
-      action-description: 'Publish your Visual Studio extensions to the marketplace with ease!'
+      action-description:
+        'Publish your Visual Studio extensions to the marketplace with ease!'
     secrets: inherit
