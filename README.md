@@ -6,23 +6,25 @@
 
 📦 Publish your Visual Studio extensions to the marketplace with ease!
 
-This GitHub Action publishes your Visual Studio extension (.vsix) to the Visual Studio Marketplace.
+This GitHub Action publishes your Visual Studio extension (.vsix) to the Visual
+Studio Marketplace.
 
 ## 🚀 Usage
 
-You can use the Visual Studio Marketplace Publisher GitHub Action by configuring a YAML-based workflow file, e.g. `.github/workflows/deploy.yml`.
+You can use the Visual Studio Marketplace Publisher GitHub Action by configuring
+a YAML-based workflow file, e.g. `.github/workflows/deploy.yml`.
 
 > ⚠️ **Note:** This action only works on a Windows-based runner.
 
 ## 📥 Inputs
 
-| Input | Required | Description |
-|-------|----------|-------------|
-| `marketplace-pat` | Yes | Your Personal Access Token for the Visual Studio Marketplace |
-| `publish-manifest-path` | Yes | Path to your publish manifest (JSON file) |
-| `vsix-path` | Yes | Path to the local VSIX package to publish |
-| `vs-version` | No | Version of Visual Studio tooling to use (default: `latest`) |
-| `vs-prerelease` | No | Allow pre-release Visual Studio tooling (default: `false`) |
+| Input                   | Required | Description                                                  |
+| ----------------------- | -------- | ------------------------------------------------------------ |
+| `marketplace-pat`       | Yes      | Your Personal Access Token for the Visual Studio Marketplace |
+| `publish-manifest-path` | Yes      | Path to your publish manifest (JSON file)                    |
+| `vsix-path`             | Yes      | Path to the local VSIX package to publish                    |
+| `vs-version`            | No       | Version of Visual Studio tooling to use (default: `latest`)  |
+| `vs-prerelease`         | No       | Allow pre-release Visual Studio tooling (default: `false`)   |
 
 ## 📋 Example
 
@@ -49,7 +51,9 @@ steps:
 ## 👥 Contributors
 
 <!-- readme: contributors -start -->
-[![CalvinAllen](https://avatars.githubusercontent.com/u/41448698?v=4&s=64)](https://github.com/CalvinAllen) 
+
+[![CalvinAllen](https://avatars.githubusercontent.com/u/41448698?v=4&s=64)](https://github.com/CalvinAllen)
+
 <!-- readme: contributors -end -->
 
 ## 📄 License
