@@ -9,93 +9,12 @@ on:
         type: string
 
 jobs:
-  changelog:
-    uses: CodingWithCalvin/.github/.github/workflows/generate-changelog.yml@main
-    secrets: inherit
-
-  release:
-    needs: changelog
-    runs-on: ubuntu-latest
-    outputs:
+  publish:
+    uses: CodingWithCalvin/.github/.github/workflows/gha-publish.yml@main
+    with:
       version: ${{ inputs.version }}
-
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: npm
-
-      - name: Install Dependencies
-        run: npm ci
-
-      - name: Rebuild dist
-        run: npm run bundle
-
-      - name: Commit dist changes
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add dist/
-          git diff --staged --quiet || git commit -m "chore: rebuild dist for v${{ inputs.version }}"
-          git push
-
-      - name: Create and push tag
-        run: |
-          git tag v${{ inputs.version }}
-          git push origin v${{ inputs.version }}
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ inputs.version }}
-          name: v${{ inputs.version }}
-          body: ${{ needs.changelog.outputs.changelog }}
-
-  notify-bluesky:
-    needs: release
-    uses: CodingWithCalvin/.github/.github/workflows/bluesky-post.yml@main
-    with:
-      post_text: |
-        🚀 Visual Studio Marketplace Publisher v${{ needs.release.outputs.version }} has been released!
-
-        Publish your Visual Studio extensions to the marketplace with ease!
-
-        [📋 Release Notes](https://github.com/${{ github.repository }}/releases/tag/v${{ needs.release.outputs.version }})
-        [📦 GitHub Marketplace](https://github.com/marketplace/actions/visual-studio-marketplace-publisher)
-
-        #github #githubactions #devops #automation
-      embed_url: https://github.com/marketplace/actions/visual-studio-marketplace-publisher
-      embed_title: Visual Studio Marketplace Publisher
-      embed_description:
-        Publish your Visual Studio extensions to the marketplace with ease!
-    secrets:
-      BLUESKY_USERNAME: ${{ secrets.BLUESKY_USERNAME }}
-      BLUESKY_APP_PASSWORD: ${{ secrets.BLUESKY_APP_PASSWORD }}
-
-  notify-linkedin:
-    needs: release
-    uses: CodingWithCalvin/.github/.github/workflows/linkedin-post.yml@main
-    with:
-      post_text: |
-        🚀 Visual Studio Marketplace Publisher v${{ needs.release.outputs.version }} has been released!
-
-        Publish your Visual Studio extensions to the marketplace with ease!
-
-        📋 Release Notes: https://github.com/${{ github.repository }}/releases/tag/v${{ needs.release.outputs.version }}
-        📦 GitHub Marketplace: https://github.com/marketplace/actions/visual-studio-marketplace-publisher
-
-        #github #githubactions #devops #automation
-      article_url: https://github.com/marketplace/actions/visual-studio-marketplace-publisher
-      article_title: Visual Studio Marketplace Publisher
-      article_description:
-        Publish your Visual Studio extensions to the marketplace with ease!
-    secrets:
-      LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-      LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+      action-name: 'Visual Studio Marketplace Publisher'
+      action-slug: 'visual-studio-marketplace-publisher'
+      action-description:
+        'Publish your Visual Studio extensions to the marketplace with ease!'
+    secrets: inherit
