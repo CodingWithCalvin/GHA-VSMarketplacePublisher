@@ -17,11 +17,11 @@ jobs:
     needs: generate
 
     steps:
-    - name: Display changelog preview
-      run: |
-        echo "=========================================="
-        echo "CHANGELOG PREVIEW"
-        echo "=========================================="
-        echo ""
-        echo "${{ needs.generate.outputs.changelog }}"
-      shell: bash
+      - name: Display changelog preview
+        run: |
+          echo "=========================================="
+          echo "CHANGELOG PREVIEW"
+          echo "=========================================="
+          echo ""
+          echo "${{ needs.generate.outputs.changelog }}"
+        shell: bash
